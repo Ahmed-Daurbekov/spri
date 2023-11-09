@@ -1,0 +1,23 @@
+.about-projects {
+    padding: 120px 0;
+
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr;
+        grid-gap: 40px;
+    
+        @media (max-width: 991.98px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    
+        @media (max-width: 630.98px) {
+            grid-template-columns: repeat(1, 1fr);
+            justify-items: center;
+        }
+    }
+
+    h2 {
+        margin-bottom: 60px;
+    }
+}

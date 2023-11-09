@@ -1,0 +1,98 @@
+.footer {
+    background: #023047;
+    color: #fff;
+    padding: 35px 0;
+
+    @media (max-width: 767.91px) {
+        padding: 50px 15px;
+    }
+
+    &__shell {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 767.91px) {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        margin-right: 80px;
+        color: #fff;
+        text-decoration: none;
+        transition: transform 0.3s ease-in-out;
+
+
+        @media (max-width: 991.91px) {
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 767.91px) {
+            margin-bottom: 30px;
+        }
+
+        img {
+            margin-right: 22px;
+        }
+
+        p {
+            width: 150px;
+            font-weight: 600;
+            letter-spacing: 0.145em;
+        }
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-basis: 100%;
+
+        @media (max-width: 767.91px) {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    &__location {
+        display: flex;
+        align-items: center;
+        max-width: 333px;
+        margin-right: 10px;
+
+        @media (max-width: 767.91px) {
+            margin-bottom: 30px;
+            max-width: none;
+        }
+
+        div {
+            margin-right: 20px;
+        }
+    }
+
+    &__contacts {
+        &-phone {
+            margin-bottom: 20px;
+        }
+
+        &-phone,
+        &-mail {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
+
+            svg {
+                margin-right: 8px;
+            }
+
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+
+    }
+}

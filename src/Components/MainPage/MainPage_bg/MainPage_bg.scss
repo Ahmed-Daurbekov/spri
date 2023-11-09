@@ -1,0 +1,53 @@
+.mainPage_bg {
+  height: 100vh;
+  margin-top: 70px;
+  background: url('../../../img/Main_bg.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  &-h1 {
+    max-width: 805px;
+    color: #FFF;
+    font-size: 55px;
+    font-weight: 700;
+    line-height: 75px; 
+
+    @media (max-width: 880px) {
+      font-size: 45px;
+      line-height: 60px;
+    }
+
+    @media (max-width: 575px) {
+      font-size: 37px;
+      line-height: 45px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 386px) {
+      font-size: 32px;
+      line-height: 45px;
+    }
+  }
+
+  &-h3 {
+    max-width: 585px;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 125%;
+    letter-spacing: 0.18px;
+
+    @media (max-width: 575px) {
+      font-size: 17px;
+    }
+
+    @media (max-width: 386px) {
+      font-size: 16px;
+    }
+  }
+}

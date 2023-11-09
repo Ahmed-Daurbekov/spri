@@ -1,0 +1,67 @@
+import './App.scss';
+import Header from './Components/Header/Header'
+import Footer from './Components/Footer/Footer'
+
+import About from './Components/About/About'
+import AboutProjects from './Components/AboutProjects/AboutProjects'
+import AboutWorks from './Components/AboutWorks/AboutWorks'
+import AboutWriters from './Components/AboutWriters/AboutWriters'
+import AppRoutes from './routes/AppRoutes';
+import React from 'react';
+import axios from 'axios';
+
+// import React from "react";
+import firebase from 'firebase/app';
+import 'firebase/storage';
+
+function App() {
+  React.useEffect(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyDO-e8ZFVEzA12XusFQq1FsnUs6yEB0eGc",
+      authDomain: "dimpom-4d9fe.firebaseapp.com",
+      projectId: "dimpom-4d9fe",
+      storageBucket: "dimpom-4d9fe.appspot.com",
+      messagingSenderId: "213650717391",
+      appId: "1:213650717391:web:f90b88e48105a3d96b95ba",
+
+      databaseURL: "https://dimpom-4d9fe-default-rtdb.firebaseio.com",
+      measurementId: "G-C5GYKMLBBL"
+    };
+    
+    // Инициализация Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  }, []);
+
+  const uploadImage = async (file) => {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    const imageRef = storageRef.child('images/' + file.name); // Путь в хранилище, куда будет загружено изображение
+  
+    try {
+      let data = await imageRef.put(file);
+      console.log('Изображение успешно загружено.');
+
+      let imgPath = data._delegate.metadata.fullPath
+      var imgstorage = firebase.storage();
+      var imgstorageRef = imgstorage.ref();
+      var fileRef = imgstorageRef.child(imgPath);
+      fileRef.getDownloadURL()
+      .then(function(url) {
+        console.log('URL файла:', url);
+      })
+    } catch (error) {
+      console.error('Ошибка загрузки изображения: ', error);
+    }
+  };
+  
+  return (
+    <div className="app">
+    <input type="file" onChange={(e) => uploadImage(e.target.files[0])} />
+      {/* <AppRoutes /> */}
+    </div>
+  );
+}
+
+export default App;

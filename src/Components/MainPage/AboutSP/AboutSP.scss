@@ -1,0 +1,80 @@
+.aboutSP {
+  margin-top: 100px;
+  margin-bottom: 60px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 1130px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &_text-block {
+    max-width: 500px;
+    margin-right: 10px;
+
+    @media (max-width: 1130px) {
+      order: 1;
+      margin-right: 0;
+      max-width: 100%;
+      margin-top: 30px;
+    }
+    
+
+    &_h2 {
+      font-size: 45px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 34px;
+      margin-bottom: 40px;
+
+      @media (max-width: 1130px) {
+        text-indent: 50px;
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 40px;
+        line-height: unset;
+      }
+  
+      @media (max-width: 480px) {
+        font-size: 32px;
+      }
+  
+      @media (max-width: 385px) {
+        font-size: 22px;
+      }
+    }
+    
+    &_p {
+      text-indent: 50px;
+      text-align: justify;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 125%;
+      letter-spacing: 0.18px;
+    }
+    
+  }
+
+  &_img-block {
+    @media (max-width: 1130px) {
+      margin: auto;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.project-card {
+    max-width: 387px;
+    padding: 0 10px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    &__img {
+        max-width: 100%;
+        margin-bottom: 25px;
+
+        img {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    &__title {
+        margin-bottom: 15px;
+    }
+
+    &__text {
+        margin-bottom: 15px;
+
+        span {
+            a {
+                color: #4E8AFF;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__date {
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 16px;
+    }
+}

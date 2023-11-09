@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &::-webkit-scrollbar {
+    width: 10px;               /* ширина всей полосы прокрутки */
+    border-left: 1px solid #023047;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #023047;    /* цвет бегунка */
+    border-radius: 20px;       /* округлось бегунка */
+    border: 1px solid #f9f9f9;  /* отступ вокруг бегунка */
+  }
+
+  // &::-webkit-scrollbar {
+  //   width: 10px;
+  // }
+  
+  // &::-webkit-scrollbar-track {
+  //   background: #023047;
+  // }
+  
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #023047;
+  //   border-radius: 20px;
+  //   border: 1px solid #f9f9f9;
+  // }
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
