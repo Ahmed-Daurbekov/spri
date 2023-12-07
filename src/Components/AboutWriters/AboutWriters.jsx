@@ -3,17 +3,20 @@ import WritersCard from '../Cards/WritersCard/WritersCard'
 import './AboutWriters.scss'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Loader from '../Loader/Loader'
 import { Auth } from '../../Context/Context'
 
 export const AboutWriters = () => {
   const {isAuth} = React.useContext(Auth)
   const [filterWriters, setFilterWriters] = React.useState('')
   const [writersList, setWritersList] = React.useState([])
+  const [loader, setLoader] = React.useState(true)
   
   React.useEffect(() => {
     axios.get(`https://dimpom-4d9fe-default-rtdb.firebaseio.com/writers.json`)
       .then(d => {
         setWritersList(addDataToState(d.data))
+        setLoader(false)
       })
   }, [])
 
@@ -47,13 +50,13 @@ export const AboutWriters = () => {
   function deleteCard(id) {
     let confirm = window.confirm('Вы уверены что хотите удалить проект')
     if (confirm) {
-        axios.delete(`https://dimpom-4d9fe-default-rtdb.firebaseio.com/writers/${id}.json`)
-          .then(d => {
-              alert('Писатель удален')
-              setWritersList(filteredItems.filter((item) => {
-                return item.id != id
-              }))
-          })
+      axios.delete(`https://dimpom-4d9fe-default-rtdb.firebaseio.com/writers/${id}.json`)
+        .then(d => {
+          alert('Писатель удален')
+          setWritersList(filteredItems.filter((item) => {
+            return item.id != id
+          }))
+        })
     }
   }
 
@@ -75,17 +78,21 @@ export const AboutWriters = () => {
           <Link to='/addNewWritter' className="add-new-writter_btn">Добавить нового писателя</Link>
         </div>
       }
-      <div className="about-writers_items">
-        {
-          filteredItems.reverse().map(obj => {
-            return <WritersCard deleteCard={() => deleteCard(obj.id)} key={obj.id} obj={obj} />
-          })
-        }
-      </div>
       {
-        filteredItems.length == 0 && <h2 className="writer-absent">
-          Писатель не найден
-        </h2>
+        loader ? <Loader /> : <>
+          <div className="about-writers_items">
+            {
+              filteredItems.reverse().map(obj => {
+                return <WritersCard deleteCard={() => deleteCard(obj.id)} key={obj.id} obj={obj} />
+              })
+            }
+          </div>
+          {
+            filteredItems.length == 0 && <h2 className="writer-absent">
+              Писатель не найден
+            </h2>
+          }
+        </>
       }
     </div>
   )

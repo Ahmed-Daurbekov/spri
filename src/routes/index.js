@@ -11,6 +11,8 @@ import AddNewProject from "../Components/AddNewProject/AddNewProject";
 import SettingsProject from "../Components/SettingsProject/SettingsProject";
 import AddNewPremie from "../Components/MainPage/Premie/AddNewPremie/AddNewPremie";
 import ProjectInfo from "../Components/ProjectInfo/ProjectInfo";
+import ShowPremies from "../Components/MainPage/Premie/ShowPremies/ShowPremies";
+import AddNewPhoto from "../Components/MainPage/Gallery/AddNewPhoto/AddNewPhoto";
 
 export const routes = [
   { path: "/", element: <MainPage /> },
@@ -26,4 +28,6 @@ export const routes = [
   { path: "addNewProject", element: <AddNewProject /> },
   { path: "addNewPremie", element: <AddNewPremie /> },
   { path: "project-info/:id", element: <ProjectInfo /> },
+  { path: "all-awards", element: <ShowPremies /> },
+  { path: "add-photo", element: <AddNewPhoto /> },
 ];

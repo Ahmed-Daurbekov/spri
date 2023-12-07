@@ -1,0 +1,61 @@
+$dragStartColor: #4d4dff;
+// $dragStartColor: #1313c2;
+
+.addNewPhoto {
+  padding-top: 90px;
+  padding-bottom: 20px;
+  display: flex;
+
+  .container {
+    width: 100%;
+  }
+
+  .submitToFB {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%;
+    letter-spacing: 0.2px;
+    border: 1px solid #000;
+    border-radius: 15px;
+    padding: 7px 20px;
+    margin-top: 5px;
+    display: inline-block;
+    cursor: pointer;
+    background: #184F6D;
+    color: #fff;
+  }
+  
+  .select-photo {
+    border: 2px dashed #000;
+    border-radius: 8px;
+    padding: 20px;
+    height: 490px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .photo {
+      width: 375px;
+      height: 400px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }    
+    
+    .text {
+      max-width: 440px;
+      color: #858585;
+      text-align: center;
+      font-size: 45px;
+      font-weight: 500;
+      line-height: 125%; /* 22.5px */
+      letter-spacing: 0.18px;
+    }
+  }
+  
+}
+

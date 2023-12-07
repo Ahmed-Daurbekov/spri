@@ -82,6 +82,7 @@ const Settings = () => {
         surname: writer.surname.slice(0, 1).toUpperCase() + writer.surname.slice(1),
         name: writer.name.slice(0, 1).toUpperCase() + writer.name.slice(1),
         fathername: writer.fathername.slice(0, 1).toUpperCase() + writer.fathername.slice(1),
+        projects: writer.projects,
         description: writer.description.slice(0, 1).toUpperCase() + writer.description.slice(1),
         birthday: writer.birthday.split('-').reverse().join('.'),
         deathday: writer.deathday ? writer.deathday.split('-').reverse().join('.') : writer.deathday,       
@@ -150,7 +151,7 @@ const Settings = () => {
 
             <div className="data-live">
               <input defaultValue={writer.birthday && writer.birthday.split('.').reverse().join('-')} onChange={e => setWriter({...writer, birthday: e.target.value})} className='input birthday' name='birthday' type="date" placeholder='Дата рождения' />
-              <input defaultValue={writer.deathday && writer.deathday.split('.').reverse().join('-')} onChange={e => setWriter({...writer, deathday: e.target.value})} className='input deathday' name='deathday' type="date" placeholder='Дата смерти (при наличии)' />
+              <input defaultValue={writer.deathday && writer.deathday.split('.').reverse().join('-')} onChange={e => setWriter({...writer, deathday: e.target.value})} onBlur={e => setWriter({...writer, deathday: e.target.value})} className='input deathday' name='deathday' type="date" placeholder='Дата смерти (при наличии)' />
             </div>
             
             <textarea onChange={e => setWriter({ ...writer, description: e.target.value })} defaultValue={writer.description ? writer.description : ''} className='textarea' placeholder='Описание'></textarea>

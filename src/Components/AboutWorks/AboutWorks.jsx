@@ -4,16 +4,19 @@ import './AboutWorks.scss'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Auth } from '../../Context/Context'
+import Loader from '../Loader/Loader'
 
 export const AboutWorks = () => {
   const {isAuth} = React.useContext(Auth)
   const [filterWriters, setFilterWriters] = React.useState('')
   const [writersList, setWritersList] = React.useState([])
+  const [loader, setLoader] = React.useState(true)
   
   React.useEffect(() => {
     axios.get(`https://dimpom-4d9fe-default-rtdb.firebaseio.com/works.json`)
       .then(d => {
         setWritersList(addDataToState(d.data))
+        setLoader(false)
       })
   }, [])
 
@@ -74,19 +77,24 @@ export const AboutWorks = () => {
             <Link to='/addNewProject' className="add-new-writter_btn">Добавить новую произведению</Link>
           </div>
         }
-        <div className="about-works_items">
-          {
-            filteredItems.reverse().map(obj => {
-              return <WorkCard deleteCard={() => deleteCard(obj.id)} key={obj.id} obj={obj} />
-            })
-          }
-        </div>
+        {
+          loader ? <Loader /> : <>
+            <div className="about-works_items">
+              {
+                filteredItems.reverse().map(obj => {
+                  return <WorkCard deleteCard={() => deleteCard(obj.id)} key={obj.id} obj={obj} />
+                })
+              }
+            </div>
+
+            {
+              filteredItems.length == 0 && <h2 className="writer-absent">
+                Произведение отсутствует
+              </h2>
+            }
+          </>
+        }
       </div>
-      {
-        filteredItems.length == 0 && <h2 className="writer-absent">
-          Произведение отсутствует
-        </h2>
-      }
     </div>
   )
 }

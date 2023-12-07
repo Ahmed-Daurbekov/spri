@@ -75,6 +75,15 @@ export const Header = () => {
     });
   }
   
+  function removeActive(e) {
+    let iconHeader = document.querySelector('.header__icon')
+    let navMenu = document.querySelector('.header__nav')
+    
+    navMenu.classList.toggle('_active')
+    document.body.classList.toggle("_lock")
+    iconHeader.classList.toggle('_active')
+  }
+
   return (
     <>
       <header className='header'>
@@ -93,16 +102,16 @@ export const Header = () => {
             <nav className="header__nav">
               <ul className="header__nav-link">
                 <li className="header__nav-item">
-                  <NavLink to="/" className="header__nav-link">Главная</NavLink>
+                  <NavLink onClick={e => removeActive()} to="/" className="header__nav-link">Главная</NavLink>
                 </li>
                 <li className="header__nav-item">
-                  <NavLink to="documents" className="header__nav-link">Документы</NavLink>
+                  <NavLink onClick={e => removeActive()} to="documents" className="header__nav-link">Документы</NavLink>
                 </li>
                 <li className="header__nav-item">
-                  <NavLink to="writers" className="header__nav-link">Писатели</NavLink>
+                  <NavLink onClick={e => removeActive()} to="writers" className="header__nav-link">Писатели</NavLink>
                 </li>
                 <li className="header__nav-item">
-                  <NavLink to="writers-works" className="header__nav-link">Творчество</NavLink>
+                  <NavLink onClick={e => removeActive()} to="writers-works" className="header__nav-link">Творчество</NavLink>
                 </li>
               </ul>
             </nav>
