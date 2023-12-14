@@ -1,18 +1,15 @@
 import React from 'react';
 import './Gallery.scss'
+import img1 from '../../../img/other/image 4.png'
+import img2 from '../../../img/other/image 5.png'
+import img3 from '../../../img/other/image 6.png'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import firebase from 'firebase/app';
 import 'firebase/storage';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import Loader from '../../Loader/Loader';
-import { Auth } from '../../../Context/Context';
 
 const Gallery = () => {
-  const {isAuth} = React.useContext(Auth)
   const [fileLinks, setFileLinks] = React.useState([]);
-  const [loader, setLoader] = React.useState(true)
 
   React.useEffect(() => {
     const firebaseConfig = {
@@ -33,90 +30,81 @@ const Gallery = () => {
   }, []);
   
   React.useEffect(() => {
-    axios.get(`https://dimpom-4d9fe-default-rtdb.firebaseio.com/gallery.json`)
-      .then(d => {
-        setFileLinks(addDataToState(d.data))
-        setLoader(false)
-      })
+    const storageRef = firebase.storage().ref();
+    const folderRef = storageRef.child('images/');
+    
+    folderRef
+    .listAll()
+    .then((result) => {
+      const promises = result.items.map((item) => item.getDownloadURL());
+      Promise.all(promises)
+        .then((urls) => {
+          setFileLinks(urls)
+        })
+        .catch((error) => {
+          console.error('Ошибка при получении URL файлов из Firebase Storage:', error);
+        });
+    })
+    .catch((error) => {
+      console.error('Ошибка при получении списка файлов из Firebase Storage:', error);
+    });
   }, [])
-
-  function addDataToState(obj) {
-    let arr = []
-    for (const key in obj) {
-      let newObj = {
-        id: key,
-        ...obj[key]
-      }
-      arr.push(newObj)
-    }
-    return arr
-  }
+  
   
   return (
     <div className="gallery">
       <h2 className="gallery_title container">Галерея</h2>
-      {
-        loader ? <Loader /> : <>
-          <Carousel
-            additionalTransfrom={0}
-            arrows
-            autoPlaySpeed={3000}
-            centerMode={false}
-            containerClass="container"
-            customTransition="all .5"
-            draggable
-            focusOnSelect={false}
-            infinite
-            itemClass="carousel-item-padding-40-px"
-            keyBoardControl
-            minimumTouchDrag={80}
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false}
-            responsive={{
-              desktop: {
-                breakpoint: {
-                  max: 3000,
-                  min: 1250,
-                },
-                items: 3,
-              },
-              tablet: {
-                breakpoint: {
-                  max: 1250,
-                  min: 890,
-                },
-                items: 2,
-              },
-              mobile: {
-                breakpoint: {
-                  max: 890,
-                  min: 0,
-                },
-                items: 1,
-              },
-            }}
-            showDots={false}
-            sliderClass="carousel-slider"
-            slidesToSlide={1}
-            swipeable
-          >
-            {
-              fileLinks.map((link, index) => {
-                return <div key={index} className="slide">
-                  <img className='slide' src={link.imagePath} alt="slide" />
-                </div>
-              })
-            }
-          </Carousel>
-          <div className="container">
-            {
-              isAuth && <div className="add-new-writter">
-                <Link to='/add-photo' className="add-new-writter_btn">Добавить фото</Link>
-              </div>
-            }
-          </div>
-        </>
-      }
+      <Carousel
+        additionalTransfrom={0}
+        arrows
+        autoPlaySpeed={3000}
+        centerMode={false}
+        containerClass="container"
+        customTransition="all .5"
+        draggable
+        focusOnSelect={false}
+        infinite
+        itemClass="carousel-item-padding-40-px"
+        keyBoardControl
+        minimumTouchDrag={80}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={{
+          desktop: {
+            breakpoint: {
+              max: 3000,
+              min: 1250,
+            },
+            items: 3,
+          },
+          tablet: {
+            breakpoint: {
+              max: 1250,
+              min: 890,
+            },
+            items: 2,
+          },
+          mobile: {
+            breakpoint: {
+              max: 890,
+              min: 0,
+            },
+            items: 1,
+          },
+        }}
+        showDots={false}
+        sliderClass="carousel-slider"
+        slidesToSlide={1}
+        swipeable
+      >
+        {
+          fileLinks.map((link, index) => {
+            return <div key={index} className="slide">
+              <img className='slide' src={link} alt="slide" />
+            </div>
+          })
+        }
+      </Carousel>
     </div>
   );
 };

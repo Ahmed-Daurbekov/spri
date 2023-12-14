@@ -95,12 +95,11 @@
 
     &_items {
         display: grid;
-        min-height: 452px;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: 1fr;
         grid-gap: 40px;
         margin-top: 20px;
-
+        
         @media (max-width: 991.98px) {
             grid-template-columns: repeat(2, 1fr);
         }
